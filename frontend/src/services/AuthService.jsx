@@ -1,12 +1,12 @@
 export const signup = user => {
-  return fetch(`${process.env.API}/signup`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  })
+  return fetch(`${process.env.API}/users`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
     .then(response => {
       return response.json();
     })
@@ -16,14 +16,14 @@ export const signup = user => {
 };
 
 export const signin = user => {
-  return fetch(`${process.env.API}/signin`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  })
+  return fetch(`${process.env.API}/users/login`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
     .then(response => {
       return response.json();
     })
@@ -43,9 +43,9 @@ export const signout = next => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('jwt');
     next();
-    return fetch(`${process.env.API}/signout`, {
-      method: 'GET'
-    })
+    return fetch(`${process.env.API}/users/logout`, {
+        method: 'GET'
+      })
       .then(response => {
         console.log('signout', response);
       })

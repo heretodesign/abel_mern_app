@@ -25,9 +25,10 @@ const SignIn = ({ history }) => {
   const handleSubmit = event => {
     event.preventDefault();
     setValues({ ...values, buttonText: 'Submitting' });
+    const BASE_URL = 'http://localhost:4000';
     axios({
       method: 'POST',
-      url: `${process.env.BASE_URL}/users/login`,
+      url: `${BASE_URL}/users/login`,
       data: { email, password }
     })
       .then(response => {
@@ -42,10 +43,10 @@ const SignIn = ({ history }) => {
             password: '',
             buttonText: 'Submitted'
           });
-          //toast.success(`Hey ${response.data.user.name}, Welcome Back!`);
+
           isAuth() && isAuth().role === 'admin'
-            ? history.push('/main-dashboard')
-            : history.push('/private/create-new-report');
+            ? history.push('/cart')
+            : history.push('/cart');
         });
       })
       .catch(error => {

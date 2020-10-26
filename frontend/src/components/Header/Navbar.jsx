@@ -79,7 +79,7 @@ const Navbar = ({ children, match, history }) => {
                         <BtnDiv>
                           <Link to="/signup">
                             <Button
-                              value="/Signup"
+                              value="Signup"
                               className="button is-small has-test-small is-fullwidth"
                             />
                           </Link>

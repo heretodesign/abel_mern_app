@@ -5,6 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import img from '../assets/maksim-larin-LtB12xWnkpw-unsplash.jpg';
 import Summer from '../components/Summer';
 import Featured from '../components/Featured';
+import Header from '../components/Header/Header';
 
 const Section = styled.section`
   background-image: url(${img});
@@ -39,7 +40,7 @@ const Div = styled.div`
 const MainBtn = styled.button`
   color: #fff;
   background: #003468;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
 
   &:hover {
@@ -84,47 +85,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="hero-head">
-          <nav className="navbar">
-            <div className="container">
-              <div className="navbar-brand" id="logoStyle">
-                <Link className="navbar-item" to="/">
-                  <MainBtn className="button is-small has-test-small is-fullwidth">
-                    A'SNEAKER HUB
-                  </MainBtn>
-                </Link>
-
-                <span
-                  className="navbar-burger burger"
-                  data-target="navbarMenuHeroA"
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-              </div>
-              <div id="navbarMenuHeroA" className="navbar-menu">
-                <div className="navbar-end">
-                  <Link to="/" className="navbar-item has-text-small">
-                    Home
-                  </Link>
-                  <span className="navbar-item">
-                    <Link to="/cart">
-                      <MainBtn className="button is-small has-test-small is-fullwidth">
-                        Cart
-                      </MainBtn>
-                    </Link>{' '}
-                    <Link to="/signin">
-                      <MainBtn className="button is-small has-test-small is-fullwidth">
-                        Signin
-                      </MainBtn>
-                    </Link>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+        <Header />
 
         <div className="hero-body">
           <div className="container has-text-centered">
@@ -150,7 +111,7 @@ const Home = () => {
               <div className="content" id="landingForm">
                 <div className="columns">
                   <div className="column is-one-quarter">
-                    <Link to="/product-list">
+                    <Link to="/products-list">
                       <MainBtn className="button is-small has-test-small is-fullwidth">
                         Check Our Summer Sale
                       </MainBtn>

@@ -30,7 +30,7 @@ const SignUp = () => {
     setValues({ ...values, buttonText: 'Submitting' });
     axios({
       method: 'POST',
-      url: `${process.env.BASE_URL}/signup`,
+      url: 'http://localhost:4000/users',
       data: { name, email, password, age, address }
     })
       .then(response => {

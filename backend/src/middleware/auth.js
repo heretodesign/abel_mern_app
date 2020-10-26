@@ -1,18 +1,11 @@
 const jwt = require("jsonwebtoken")
 const User = require("../models/user")
 
-const userLoginCredentials = [{
-    _id: 3222,
-    name: 'abeldevelopermernstack',
-    email: 'abeldev@gmail.com',
-    password: 'abelshop123',
-}];
-
 const auth = async (req, res, next) => {
     try {
         const token = req.header("Authorization").replace("Bearer ", "")
         const decoded = jwt.verify(token, "thisismylogin")
-        const user = await userLoginCredentials.findOne({
+        const user = await User.findOne({
             _id: decoded._id,
             "tokens.token": token
         })
