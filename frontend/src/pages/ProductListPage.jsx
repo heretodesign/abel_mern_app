@@ -143,67 +143,7 @@ const ProductListPage = ({ match }) => {
         </div>
       </section>
 
-      <section className="section is-paddingless-horizontal">
-        <div className="container-fluid grid is-large">
-          <div className="content">
-            <div className="columns is-multiline is-gapless is-desktop">
-              <div className="column box is-2 is-one-third-mobile is-one-third-tablet is-one-third-desktop">
-                {products.map((product, i) => (
-                  <div key={i} className="products-items">
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image">
-                          <img
-                            src={
-                              process.env.PUBLIC_URL +
-                              `/assets/${product.image}.jpg`
-                            }
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <div className="media">
-                          <div className="media-content">
-                            <div className="column">
-                              <div className="columns">
-                                <TextPara class="title is-5 has-text-centered">
-                                  {product.name}
-                                  {product._id}
-                                </TextPara>
-                                <TextPara class="title is-5 has-text-centered">
-                                  {product.description}
-                                </TextPara>
-                              </div>
-                              <div className="columns">
-                                <div className="itemBtn">
-                                  <Link
-                                    to={`/product-item-view/${product._id}`}
-                                  >
-                                    <MainBtn className="button is-small has-test-small is-fullwidth">
-                                      Item Details
-                                    </MainBtn>
-                                  </Link>
-                                </div>
-                                <div className="cartBtn">
-                                  <Link to="/cart">
-                                    <MainBtn className="button is-small has-test-small is-fullwidth">
-                                      Add To Cart
-                                    </MainBtn>
-                                  </Link>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </>
   );
 };
