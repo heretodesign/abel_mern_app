@@ -142,30 +142,8 @@ const ProductListPage = ({ match }) => {
           </div>
         </div>
       </section>
-
-
     </>
   );
-};
-
-const paragraphStyle = {
-  fontSize: '1.2rem',
-  color: '#003468',
-  marginBottom: '1px'
-};
-
-const colorStyle = {
-  color: '#003468'
-};
-
-const bkStyle = {
-  background: '#003468',
-  color: 'white'
-};
-
-const outlinedStyle = {
-  borderColor: '#003468',
-  color: '#003468'
 };
 
 export default withRouter(ProductListPage);
