@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    ports:
+      - 4000:4000
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    networks:
+      - regov-mern-tier
+    depends_on:
+      - db
+    command: npm run start
+    env_file: ./backend/.env
+    environment:
+      - CLIENT_URL=http://localhost:3000/
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://db:27017/regovdatadb
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    depends_on:
+      - backend
+    env_file: ./frontend/.env
+    networks:
+      - regov-mern-tier
+    volumes:
+      - ./frontend/:/frontend/src/app
+      - /app/node_modules/
+    command: yarn start
+
+  db:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    restart: always
+    networks:
+      - regov-mern-tier
+    volumes:
+      - regov-data:/data/db
+
+volumes:
+  regov-data:
+    driver: local
+
+networks:
+  regov-mern-tier:
+    driver: bridge
