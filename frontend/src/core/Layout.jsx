@@ -3,6 +3,31 @@ import { Link, withRouter } from 'react-router-dom';
 import { isAuth, signout } from '../services/AuthService';
 import { FaBell } from 'react-icons/fa';
 import { FaBriefcase } from 'react-icons/fa';
+import styled from 'styled-components';
+import Button from '../components/shared/Button';
+
+const MainBtn = styled.button`
+  color: #fff;
+  background: #003468;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+`;
+const BtnDiv = styled.div`
+  margin-right: 10px;
+`;
+const TextPara = styled.p`
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 10px;
+  background-color: transparent;
+`;
+const Nav = styled.nav`
+  color: #fff;
+  background: #003468;
+`;
 
 const Layout = ({ children, match, history }) => {
   const isActive = path => {
@@ -13,25 +38,22 @@ const Layout = ({ children, match, history }) => {
     }
   };
 
-  const nav = () => <a className="navbar-item"></a>;
-
   return (
     <>
-      <section className="is-medium">
-        <div className="container is-fluid">
-          <nav
-            className="navbar is-fixed-top"
-            role="navigation"
-            aria-label="main navigation"
-          >
-            <div className="navbar-brand">
-              <a className="navbar-item" href="https://bulma.io">
-                <img
-                  src="https://bulma.io/images/bulma-logo.png"
-                  width="112"
-                  height="28"
-                />
-              </a>
+      <section className="hero is-primary is-medium container-fluid imgLanding">
+        <Nav
+          className="navbar"
+          role="navigation"
+          aria-label="main navigation"
+          style={{ background: '#003468', color: 'white' }}
+        >
+          <div className="container">
+            <div className="navbar-brand" id="logoStyle">
+              <Link className="navbar-item" to="/">
+                <MainBtn className="button is-small has-test-small is-fullwidth">
+                  A'SNEAKER HUB
+                </MainBtn>
+              </Link>
 
               <a
                 role="button"
@@ -47,53 +69,48 @@ const Layout = ({ children, match, history }) => {
             </div>
 
             <div id="navbarBasicExample" className="navbar-menu">
-              <div className="navbar-start">
-                <Link to="/" className="navbar-item is-active has-text-black">
-                  Home
-                </Link>
-                {nav()}
-              </div>
-
               <div className="navbar-end">
-                <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link is-arrowless">
-                    <FaBriefcase />
-                  </a>
-                  <div className="navbar-dropdown">
-                    <Link to="/admin/managers" className="navbar-item">
-                      Admin / Managers
-                    </Link>
-                    <Link to="/admin/users-list" className="navbar-item">
-                      Users
-                    </Link>
-                  </div>
-                </div>
-                <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link is-arrowless">
-                    <FaBell />
-                  </a>
-                  <div className="navbar-dropdown">
-                    <a className="navbar-item">Overview</a>
-                  </div>
-                </div>
                 <div className="navbar-item">
+                  <Link to="/products-list">
+                    <TextPara>Shop</TextPara>
+                  </Link>
                   <div className="buttons">
+                    <BtnDiv>
+                      <Link to="/cart">
+                        <Button
+                          value="Cart"
+                          className="button is-small has-test-small is-fullwidth"
+                        />
+                      </Link>
+                    </BtnDiv>
                     {!isAuth() && (
                       <Fragment>
-                        <Link to="/signup" className="button is-info">
-                          <strong>Signup</strong>
-                        </Link>
-                        <Link to="/signin" className="button is-info">
-                          <strong>Sign In</strong>
-                        </Link>
+                        <BtnDiv>
+                          <Link to="/signup">
+                            <Button
+                              value="Signup"
+                              className="button is-small has-test-small is-fullwidth"
+                            />
+                          </Link>
+                        </BtnDiv>
+                        <BtnDiv>
+                          <Link to="/signin">
+                            <Button
+                              value="Sign In"
+                              className="button is-small has-test-small is-fullwidth"
+                            />
+                          </Link>
+                        </BtnDiv>
                       </Fragment>
                     )}
                     {isAuth() && isAuth().role === 'admin' && (
                       <span className="navbar-item">
                         <strong className="">
-                          <Link to="/admin" className="button is-info">
-                            {isAuth().name}
-                          </Link>
+                          <BtnDiv>
+                            <Link to="/admin">
+                              <TextPara>{isAuth().name}</TextPara>
+                            </Link>
+                          </BtnDiv>
                         </strong>
                       </span>
                     )}
@@ -101,9 +118,11 @@ const Layout = ({ children, match, history }) => {
                     {isAuth() && isAuth().role === 'user' && (
                       <span className="navbar-item">
                         <strong className="">
-                          <Link to="/private" className="button is-info">
-                            {isAuth().name}
-                          </Link>
+                          <BtnDiv>
+                            <Link to="/private">
+                              <TextPara>{isAuth().name}</TextPara>
+                            </Link>
+                          </BtnDiv>
                         </strong>
                       </span>
                     )}
@@ -124,8 +143,8 @@ const Layout = ({ children, match, history }) => {
                 </div>
               </div>
             </div>
-          </nav>
-        </div>
+          </div>
+        </Nav>
       </section>
       <section className="is-medium">
         <div className="container is-fluid">{children}</div>

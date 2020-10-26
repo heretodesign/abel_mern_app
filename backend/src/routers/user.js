@@ -6,9 +6,18 @@ const axios = require('axios')
 
 const userLoginCredentials = [{
     _id: 3222,
-    name: 'abeldevelopermernstack',
-    email: 'abeldev@gmail.com',
+    name: 'abel mernstack',
+    email: 'abel@gmail.com',
     password: 'abelshop123',
+    age: '26',
+    address: 'Bangsa South 3839, jalan murni 3'
+}, {
+    _id: 3223,
+    name: 'dev mernstack',
+    email: 'dev@gmail.com',
+    password: 'devshop123',
+    age: '26',
+    address: 'Bangsa South 3839, jalan murni 3'
 }];
 
 /**
@@ -103,12 +112,6 @@ router.post('/users/login', async (req, res) => {
 /**
  * @createEvent emit an event when you create a product
  */
-router.post('/events', (req, res) => {
-    console.log('Received Event:', req.body.type);
-
-    res.send({});
-})
-
 router.post('/users/login', async (req, res) => {
     try {
         const user = await userLoginCredentials.find(req.body.email, req.body.password)

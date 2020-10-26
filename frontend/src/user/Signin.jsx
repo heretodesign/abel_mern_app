@@ -27,7 +27,7 @@ const SignIn = ({ history }) => {
     setValues({ ...values, buttonText: 'Submitting' });
     axios({
       method: 'POST',
-      url: `${process.env.REACT_APP_API}/signin`,
+      url: `${process.env.BASE_URL}/users/login`,
       data: { email, password }
     })
       .then(response => {
@@ -112,7 +112,7 @@ const SignIn = ({ history }) => {
       <div className="container justify-content-center">
         <ToastContainer />
         {isAuth() ? <Redirect to="/" /> : null}
-        {JSON.stringify({ email, password })}
+        {/*{JSON.stringify({ email, password })}*/}
         <br /> <br /> <br />
         <br />
         <div className="columns">
@@ -126,10 +126,7 @@ const SignIn = ({ history }) => {
         {signinForm()}
         <br />
         <div className="column is-three-fifths is-offset-one-fifth">
-          <Link
-            to="/auth/password/forgot"
-            className="button is-small is-danger is-outlined"
-          >
+          <Link to="/signin" className="button is-small is-danger is-outlined">
             Forgot Password
           </Link>
         </div>

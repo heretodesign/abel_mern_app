@@ -12,9 +12,10 @@ const ProductListPage = lazy(() => import('./pages/ProductListPage'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const Signin = lazy(() => import('./user/Signin'));
-const Register = lazy(() => import('./user/Signup'));
+const Signup = lazy(() => import('./user/Signup'));
 const UserRoute = lazy(() => import('./auth/UserRoute'));
 const Payment = lazy(() => import('./pages/Payment'));
+const Category = lazy(() => import('./components/Category'));
 
 function App() {
   return (
@@ -43,8 +44,8 @@ function App() {
             <Route exact path="/shop" component={Shop} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/signin" component={Signin} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/category/:slug" component={Register} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/category/:slug" component={Category} />
             <UserRoute exact path="/checkout" component={Checkout} />
             <UserRoute exact path="/payment" component={Payment} />
             <Route component={NoMatchRoute} />

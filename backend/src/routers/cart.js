@@ -92,21 +92,6 @@ router.post('/coupons', async (req, res) => {
 /**
  * @getCouponById
  */
-// router.get('/coupon/:_id', (req, res) => {
-//   const _id = req.params._id;
-//   let data = []
-//   const findExist = storeCoupons.find(category => {
-//     return category._id === parseInt(req.params._id);
-//   });
 
-//   if (!findExist) {
-//     return res.status(404).send({
-//       error: true,
-//       msg: 'Coupon does not exist'
-//     });
-//   }
-//   data.push(findExist)
-//   res.send(data);
-// });
 
 module.exports = router;

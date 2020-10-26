@@ -1,5 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { isAuth, signout } from '../../services/AuthService';
+import { FaBell } from 'react-icons/fa';
+import { FaBriefcase } from 'react-icons/fa';
 import styled from 'styled-components';
 import Button from '../shared/Button';
 
@@ -22,7 +25,7 @@ const TextPara = styled.p`
   background-color: transparent;
 `;
 
-const Navbar = () => {
+const Navbar = ({ children, match, history }) => {
   return (
     <>
       <section className="hero is-primary is-medium container-fluid imgLanding">
@@ -30,7 +33,7 @@ const Navbar = () => {
           className="navbar"
           role="navigation"
           aria-label="main navigation"
-          style={bkStyle}
+          style={{ background: '#003468', color: 'white' }}
         >
           <div className="container">
             <div className="navbar-brand" id="logoStyle">
@@ -62,7 +65,6 @@ const Navbar = () => {
                   >
                     <TextPara>Shop</TextPara>
                   </Link>
-
                   <div className="buttons">
                     <BtnDiv>
                       <Link to="/cart">
@@ -70,16 +72,64 @@ const Navbar = () => {
                           value="Cart"
                           className="button is-small has-test-small is-fullwidth"
                         />
-                      </Link>{' '}
-                    </BtnDiv>
-                    <div>
-                      <Link to="/signin">
-                        <Button
-                          value="Signin"
-                          className="button is-small has-test-small is-fullwidth"
-                        />
                       </Link>
-                    </div>
+                    </BtnDiv>
+                    {!isAuth() && (
+                      <Fragment>
+                        <BtnDiv>
+                          <Link to="/signup">
+                            <Button
+                              value="/Signup"
+                              className="button is-small has-test-small is-fullwidth"
+                            />
+                          </Link>
+                        </BtnDiv>
+                        <BtnDiv>
+                          <Link to="/signin">
+                            <Button
+                              value="Sign In"
+                              className="button is-small has-test-small is-fullwidth"
+                            />
+                          </Link>
+                        </BtnDiv>
+                      </Fragment>
+                    )}
+                    {isAuth() && isAuth().role === 'admin' && (
+                      <span className="navbar-item">
+                        <strong className="">
+                          <BtnDiv>
+                            <Link to="/admin">
+                              <TextPara>{isAuth().name}</TextPara>
+                            </Link>
+                          </BtnDiv>
+                        </strong>
+                      </span>
+                    )}
+
+                    {isAuth() && isAuth().role === 'user' && (
+                      <span className="navbar-item">
+                        <strong className="">
+                          <BtnDiv>
+                            <Link to="/private">
+                              <TextPara>{isAuth().name}</TextPara>
+                            </Link>
+                          </BtnDiv>
+                        </strong>
+                      </span>
+                    )}
+
+                    {isAuth() && (
+                      <span
+                        className="nav-link"
+                        onClick={() => {
+                          signout(() => {
+                            history.push('/');
+                          });
+                        }}
+                      >
+                        <strong className="button is-info">Signout</strong>
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -91,18 +141,4 @@ const Navbar = () => {
   );
 };
 
-const pStyle = {
-  color: '#fff'
-};
-
-const bkStyle = {
-  // background: '#1167bf',
-  background: '#003468',
-  color: 'white'
-};
-
-const fullStyle = {
-  background: '#white',
-  color: '#011240'
-};
 export default Navbar;
